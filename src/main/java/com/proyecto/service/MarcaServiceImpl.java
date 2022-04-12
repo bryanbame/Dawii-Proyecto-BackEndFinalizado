@@ -19,4 +19,9 @@ public class MarcaServiceImpl implements MarcaService {
 		return Repository.findAll();
 	}
 
+	@Override
+	public Marca insertaMarca(Marca obj) {
+		return Repository.save(obj);
+	}
+
 }
