@@ -1,5 +1,6 @@
 package com.proyecto.controller;
 
+import java.util.Date;
 import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import com.proyecto.util.AppSettings;
 
 @RestController
 @RequestMapping("/url/marca")
+//@CrossOrigin(origins = AppSettings.URL_CROSS_ORIGIN)
 @CrossOrigin(origins = AppSettings.URL_CROSS_ORIGIN)
 public class MarcaController {
 	
@@ -29,6 +31,8 @@ public class MarcaController {
 		HashMap<String, Object> salida = new HashMap<String, Object>();
 		try {
 			obj.setIdMarca(0);// Para que registre, sino actualiza
+			obj.setFechaRegistro(new Date()); //probando default de fecha registro
+			obj.setEstado(1); //probando default de estado
 			Marca objSalida = Mserv.insertaMarca(obj);
 			if (objSalida == null) {
 				salida.put("mensaje", "Error en el registro");
