@@ -1,5 +1,6 @@
 package com.proyecto.controller;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -40,6 +41,8 @@ public class ProductoController {
 		try {
 			
 				obj.setIdProducto(0);// Para que registre, sino actualiza
+				obj.setFechaRegistro(new Date());
+				obj.setEstado(1);
 				Producto objSalida = service.insertaProducto(obj);
 				if (objSalida == null) {
 					salida.put("mensaje", "Error en el registro");
