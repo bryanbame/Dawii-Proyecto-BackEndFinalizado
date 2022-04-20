@@ -31,8 +31,8 @@ public class MarcaController {
 		HashMap<String, Object> salida = new HashMap<String, Object>();
 		try {
 			obj.setIdMarca(0);// Para que registre, sino actualiza
-			obj.setFechaRegistro(new Date()); //probando default de fecha registro
-			obj.setEstado(1); //probando default de estado
+			obj.setFechaRegistro(new Date()); //probando default de fecha registro - si funciona
+			obj.setEstado(1); //probando default de estado - si funciona
 			Marca objSalida = Mserv.insertaMarca(obj);
 			if (objSalida == null) {
 				salida.put("mensaje", "Error en el registro");
