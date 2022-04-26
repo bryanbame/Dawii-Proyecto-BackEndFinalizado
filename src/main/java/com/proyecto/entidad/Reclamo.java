@@ -58,4 +58,5 @@ public class Reclamo {
 	@JoinColumn(name = "idTipoReclamo")
 	private TipoReclamo tipoReclamo;
 
+	
 }
