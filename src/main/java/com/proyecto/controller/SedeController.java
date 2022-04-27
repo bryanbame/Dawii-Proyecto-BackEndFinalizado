@@ -52,8 +52,5 @@ public class SedeController {
 			salida.put("mensaje", "Error en el registro");
 		}
 		return ResponseEntity.ok(salida);
-	}
-	
-	
-	
+	}	
 }
