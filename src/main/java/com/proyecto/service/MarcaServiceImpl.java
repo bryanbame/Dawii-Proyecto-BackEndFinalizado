@@ -24,4 +24,10 @@ public class MarcaServiceImpl implements MarcaService {
 		return Repository.save(obj);
 	}
 
+	@Override
+	public List<Marca> listaMarcaPorNombreDescCertPais(String nombre, String descripcion, String certificado,
+			int idPais) {
+		return Repository.listaMarcaPorNombreDescCertPais(nombre, descripcion, certificado, idPais);
+	}
+
 }
