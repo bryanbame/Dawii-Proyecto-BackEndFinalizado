@@ -25,6 +25,10 @@ public class SedeServiceImpl implements SedeService{
 		
 		return repository.save(obj);
 	}
+	@Override
+	public List<Sede> listaSedePorNomDirEstPais(String nombre, String direccion, int estado,String codigoPostal, int idPais) {
+		return repository.listaSedePorNomDirEstPais(nombre, direccion, estado, codigoPostal, idPais);
+	}
 
 	
 	
