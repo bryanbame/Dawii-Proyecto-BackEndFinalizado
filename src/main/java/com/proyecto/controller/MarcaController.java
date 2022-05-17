@@ -56,11 +56,12 @@ public class MarcaController {
 			@RequestParam(value = "nombre", required = false, defaultValue = "") String nombre,
 			@RequestParam(value = "descripcion", required = false, defaultValue = "") String descripcion,
 			@RequestParam(value = "certificado", required = false, defaultValue = "") String certificado,
-			@RequestParam(value = "idPais", required = false, defaultValue = "-1") int idPais) {
+			@RequestParam(value = "idPais", required = false, defaultValue = "-1") int idPais,
+			@RequestParam(name = "estado", required = true, defaultValue = "1") int estado){
 		
 		Map<String, Object> salida = new HashMap<String, Object>();
 		try {
-			List<Marca> lista = Mserv.listaMarcaPorNombreDescCertPais("%"+nombre+"%", "%"+descripcion+"%",certificado, idPais);
+			List<Marca> lista = Mserv.listaMarcaPorNombreDescCertPais("%"+nombre+"%", "%"+descripcion+"%",certificado, idPais, estado);
 			if(CollectionUtils.isEmpty(lista)){
 				salida.put("mensaje", "No existe elementos para la consulta");
 			}else {
