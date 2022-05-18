@@ -60,7 +60,7 @@ public class ProductoController {
 		return ResponseEntity.ok(salida);
 	}
 	
-	@GetMapping("/porNombreDescCertPaisConParametros")
+	@GetMapping("/filtroProductop")
 	@ResponseBody
 	public ResponseEntity<Map<String, Object>> listaPorFiltros(
 			@RequestParam(value = "nombre", required = false, defaultValue = "") String nombre,
