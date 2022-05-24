@@ -16,14 +16,17 @@ public class ProveedorServiceImpl implements ProveedorService {
 	
 	@Override
 	public Proveedor insertaActualizaProveedor(Proveedor obj) {
-		// TODO Auto-generated method stub
 		return repository.save(obj);
 	}
 
 	@Override
 	public List<Proveedor> listaProveedor() {
-		// TODO Auto-generated method stub
 		return repository.findAll();
+	}
+
+	@Override
+	public List<Proveedor> listaProveedorPorRazonSRucUbigeoEstado(String razonsocial, String ruc, int idUbigeo,	String contacto, int estado) {
+		return repository.listaProveedorPorRazonSRucUbigeoEstado(razonsocial, ruc, idUbigeo, contacto, estado);
 	}
 
 	
