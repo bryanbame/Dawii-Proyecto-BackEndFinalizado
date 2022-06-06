@@ -25,6 +25,16 @@ public class SedeServiceImpl implements SedeService{
 		
 		return repository.save(obj);
 	}
+	@Override
+	public Sede insertaActualizaSede(Sede sede) {
+		
+		return repository.save(sede);
+	}
+	@Override
+	public List<Sede> listaSedePorNombreLike(String nombre) {
+
+		return repository.listaPorNombreLike(nombre);
+	}
 
 	
 	
