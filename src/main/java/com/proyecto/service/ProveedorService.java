@@ -8,5 +8,6 @@ public interface ProveedorService {
 	
 	public Proveedor insertaActualizaProveedor(Proveedor obj);
 	public abstract List<Proveedor> listaProveedor();
-
+	public List<Proveedor> listaProveedorPorRazonSRucUbigeoEstado(String razonsocial, String ruc, int idUbigeo, String contacto, int estado);
+	
 }

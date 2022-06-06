@@ -1,5 +1,7 @@
 package com.proyecto.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,11 @@ public class ReclamoServiceImpl implements ReclamoService {
 	@Override
 	public Reclamo insertaReclamo(Reclamo obj) {
 		return Repository.save(obj);
+	}
+
+	@Override
+	public List<Reclamo> listaReclamoConParametros(String fechaRegistro, int cliente, int TipoReclamo, int estado) {
+		return Repository.listaReclamoConParametros(fechaRegistro, cliente, TipoReclamo, estado);
 	}
 
 }

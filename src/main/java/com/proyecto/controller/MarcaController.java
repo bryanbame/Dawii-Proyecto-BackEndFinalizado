@@ -54,14 +54,15 @@ public class MarcaController {
 	@ResponseBody
 	public ResponseEntity<Map<String, Object>> listaNombreDescCertPaisConParametros(
 			@RequestParam(value = "nombre", required = false, defaultValue = "") String nombre,
-			@RequestParam(value = "descripcion", required = false, defaultValue = "") String descripcion,
 			@RequestParam(value = "certificado", required = false, defaultValue = "") String certificado,
 			@RequestParam(value = "idPais", required = false, defaultValue = "-1") int idPais,
-			@RequestParam(name = "estado", required = true, defaultValue = "1") int estado){
+			@RequestParam(name = "estado", required = true, defaultValue = "1") int estado,
+			@RequestParam(name = "fechaInicio", required = false, defaultValue = "") String fechaInicio,
+			@RequestParam(name = "fechaFin", required = false, defaultValue = "") String fechaFin){
 		
 		Map<String, Object> salida = new HashMap<String, Object>();
 		try {
-			List<Marca> lista = Mserv.listaMarcaPorNombreDescCertPais("%"+nombre+"%", "%"+descripcion+"%",certificado, idPais, estado);
+			List<Marca> lista = Mserv.listaMarcaPorNombreDescCertPais("%"+nombre+"%", certificado, idPais, estado, fechaInicio, fechaFin);
 			if(CollectionUtils.isEmpty(lista)){
 				salida.put("mensaje", "No existe elementos para la consulta");
 			}else {

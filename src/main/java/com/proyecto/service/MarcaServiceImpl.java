@@ -25,9 +25,14 @@ public class MarcaServiceImpl implements MarcaService {
 	}
 
 	@Override
-	public List<Marca> listaMarcaPorNombreDescCertPais(String nombre, String descripcion, String certificado,
-			int idPais, int estado) {
-		return Repository.listaMarcaPorNombreDescCertPais(nombre, descripcion, certificado, idPais, estado);
+	public List<Marca> listaMarcaPorNombreDescCertPais(String nombre, String certificado,
+			int idPais, int estado, String fecInicio, String fecFin) {
+		return Repository.listaMarcaPorNombreDescCertPais(nombre, certificado, idPais, estado, fecInicio, fecFin);
+	}
+
+	@Override
+	public List<Marca> listaDocentePorNombreLike(String nombre) {
+		return Repository.listaPorNombreLike(nombre);
 	}
 
 }
