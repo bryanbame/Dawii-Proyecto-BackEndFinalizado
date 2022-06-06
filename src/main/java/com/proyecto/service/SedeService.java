@@ -8,9 +8,6 @@ public interface SedeService {
 
 	public abstract List<Sede> listaSede();
 	public abstract Sede insertaSede(Sede obj);
-	public abstract List<Sede> listaSedePorNomDirEstPais(String nombre, String direccion, int estado,String codigoPostal, int idPais);
-	
-	//CRUD
-	public abstract Sede insertaActualizaSede(Sede sede);
+	public abstract List<Sede> listaSedePorNomDirEstPais(String nombre, String direccion, int estado,String codigoPostal, int idPais);	
 	public abstract List<Sede> listaSedePorNombreLike(String nombre);
 }

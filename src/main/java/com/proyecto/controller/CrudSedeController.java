@@ -19,10 +19,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.proyecto.entidad.Sede;
 import com.proyecto.service.SedeService;
+import com.proyecto.util.AppSettings;
 
 @RestController
-@RequestMapping("/rest/crudSede")
-@CrossOrigin(origins= "http://localhost:4200")
+@RequestMapping("/url/crudSede")
+@CrossOrigin(origins = AppSettings.URL_CROSS_ORIGIN)
 public class CrudSedeController {
 
 	@Autowired
@@ -33,6 +34,9 @@ public class CrudSedeController {
 	public ResponseEntity<List<Sede>> listaSedePorNombreLike(@PathVariable("nom") String nom){
 		List<Sede> lista= null;
 		try {
+			if(nom.equals("todos")) {
+			 lista = service.listaSedePorNombreLike("%");
+			}
 			 lista = service.listaSedePorNombreLike("%" + nom + "%");
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -48,7 +52,7 @@ public class CrudSedeController {
 			obj.setIdSede(0);
 			obj.setFechaRegistro(new Date());
 			obj.setEstado(1);
-			Sede objSalida = service.insertaActualizaSede(obj);
+			Sede objSalida = service.insertaSede(obj);
 			if(objSalida == null) {
 				salida.put("mensaje", "Error en el registro");
 			} else {
@@ -66,7 +70,7 @@ public class CrudSedeController {
 	public ResponseEntity<Map<String, Object>> actualizaSede(@RequestBody Sede obj){
 		Map<String, Object> salida = new HashMap<>();
 		try {
-			Sede objSalida = service.insertaActualizaSede(obj);
+			Sede objSalida = service.insertaSede(obj);
 			if(objSalida == null) {
 				salida.put("mensaje", "Error en la actualización");
 			} else {
