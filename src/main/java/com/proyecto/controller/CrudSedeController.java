@@ -36,8 +36,10 @@ public class CrudSedeController {
 		try {
 			if(nom.equals("todos")) {
 			 lista = service.listaSedePorNombreLike("%");
-			}
+			}else {
 			 lista = service.listaSedePorNombreLike("%" + nom + "%");
+			}
+
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
