@@ -31,7 +31,7 @@ public class MarcaServiceImpl implements MarcaService {
 	}
 
 	@Override
-	public List<Marca> listaDocentePorNombreLike(String nombre) {
+	public List<Marca> listaMarcaPorNombreLike(String nombre) {
 		return Repository.listaPorNombreLike(nombre);
 	}
 
