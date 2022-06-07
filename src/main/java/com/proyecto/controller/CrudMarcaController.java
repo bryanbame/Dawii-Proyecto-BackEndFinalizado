@@ -29,15 +29,15 @@ public class CrudMarcaController {
 	@Autowired
 	private MarcaService Mservice;
 
-	@GetMapping("/listaDocentePorNombreLike/{nom}")
+	@GetMapping("/listaMarcaPorNombreLike/{nom}")
 	@ResponseBody
-	public ResponseEntity<List<Marca>> listaDocentePorNombreLike(@PathVariable("nom") String nom) {
+	public ResponseEntity<List<Marca>> listaMarcaPorNombreLike(@PathVariable("nom") String nom) {
 		List<Marca> lista  = null;
 		try {
 			if (nom.equals("todos")) {
-				lista = Mservice.listaDocentePorNombreLike("%");
+				lista = Mservice.listaMarcaPorNombreLike("%");
 			}else {
-				lista = Mservice.listaDocentePorNombreLike("%" + nom + "%");	
+				lista = Mservice.listaMarcaPorNombreLike("%" + nom + "%");	
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -45,9 +45,9 @@ public class CrudMarcaController {
 		return ResponseEntity.ok(lista);
 	}
 	
-	@PostMapping("/registraDocente")
+	@PostMapping("/registraMarca")
 	@ResponseBody
-	public ResponseEntity<Map<String, Object>> insertaMarca(@RequestBody Marca obj) {
+	public ResponseEntity<Map<String, Object>> registraMarca(@RequestBody Marca obj) {
 		Map<String, Object> salida = new HashMap<>();
 		try {
 			obj.setIdMarca(0);// Para que registre, sino actualiza
@@ -66,9 +66,9 @@ public class CrudMarcaController {
 		return ResponseEntity.ok(salida);
 	}
 	
-	@PutMapping("/actualizaDocente")
+	@PutMapping("/actualizaMarca")
 	@ResponseBody
-	public ResponseEntity<Map<String, Object>> actualizaDocente(@RequestBody Marca obj) {
+	public ResponseEntity<Map<String, Object>> actualizaMarca(@RequestBody Marca obj) {
 		Map<String, Object> salida = new HashMap<>();
 		try {
 			Marca objSalida =  Mservice.insertaMarca(obj);
