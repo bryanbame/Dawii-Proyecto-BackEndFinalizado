@@ -1,6 +1,7 @@
 package com.proyecto.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,6 +37,17 @@ public class SedeServiceImpl implements SedeService{
 
 		return repository.listaPorNombreLike(nombre);
 
+	}
+	@Override
+	public void eliminaSede(int id) {
+		
+		repository.deleteById(id); 
+		
+	}
+	@Override
+	public Optional<Sede> buscaSede(int id) {
+
+		return repository.findById(id);
 	}
 	
 	
