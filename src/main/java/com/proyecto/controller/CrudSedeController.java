@@ -4,10 +4,12 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -81,6 +83,25 @@ public class CrudSedeController {
 		} catch (Exception e) {
 			e.printStackTrace();
 			salida.put("mensaje", "Error en la actualización");
+		}
+		return ResponseEntity.ok(salida);
+	}
+	
+	@DeleteMapping("/eliminaSede/{id}")
+	@ResponseBody
+	public ResponseEntity<Map<String, Object>> eliminaSede(@PathVariable("id") int id){
+		Map<String, Object> salida = new HashMap<>();
+		try {
+			service.eliminaSede(id);
+			Optional<Sede> objSalida = service.buscaSede(id);
+			if(objSalida.isEmpty()) {
+				salida.put("mensaje", "Se eliminó correctamente");
+			} else {
+				salida.put("mensaje", "Error en la eliminación");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			salida.put("mensaje", "Error en la eliminación");
 		}
 		return ResponseEntity.ok(salida);
 	}
