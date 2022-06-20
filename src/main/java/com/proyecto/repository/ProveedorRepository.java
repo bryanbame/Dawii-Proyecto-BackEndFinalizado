@@ -12,5 +12,8 @@ public interface ProveedorRepository extends JpaRepository<Proveedor, Integer> {
 	// filtrar proveedor
 	@Query("select x from Proveedor x where (?1 is '' or x.razonsocial like ?1) and (?2 is '' or x.ruc = ?2)and (?3 is -1 or x.ubigeo.idUbigeo = ?3)and (?4 is '' or x.contacto like ?4) and x.estado = ?5")
 	public List<Proveedor> listaProveedorPorRazonSRucUbigeoEstado(String razonsocial, String ruc, int idUbigeo, String contacto, int estado);
-
+    //crud de producto
+	@Query("select x from Proveedor x where x.razonsocial like ?1")
+	public List<Proveedor> listadoProveedorlike(String razonsocial);
+	
 }

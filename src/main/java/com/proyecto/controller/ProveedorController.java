@@ -4,13 +4,17 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -80,5 +84,91 @@ public class ProveedorController {
 			salida.put("mensaje", "Error al Buscar");
 		}
 		return ResponseEntity.ok(salida);
+	}//fin de consulta
+	
+	//Grud de proveedor consultar
+	@GetMapping("/listaProveedorPorRazonLike/{razon}")
+	@ResponseBody
+	public ResponseEntity<List<Proveedor>> listaProveedorPorRazonLike(@PathVariable("razon") String razon) {
+		List<Proveedor> lista = null;
+		try {
+			if (razon.equals("todos")) {
+				lista = proveedorService.listaProveedorPorRazonLike("%");
+			}else {
+				lista = proveedorService.listaProveedorPorRazonLike("%"+razon + "%");	
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ResponseEntity.ok(lista);
+	}//fin Grud de proveedor consultar
+	
+	//Grud de proveedor registrar
+	@PostMapping("/registraProveedor")
+	@ResponseBody
+	public ResponseEntity<Map<String, Object>> registraProveedor(@RequestBody Proveedor obj) {
+		Map<String, Object> salida = new HashMap<>();
+		try {
+			obj.setIdProveedor(0);
+			obj.setFechaRegistro(new Date());
+			obj.setEstado(1);
+			Proveedor objSalida =  proveedorService.insertaActualizaProveedor(obj);
+			if (objSalida == null) {
+				salida.put("mensaje", "No se registró proveedor");
+			} else {
+				salida.put("mensaje", "Se registró correctamente.");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			salida.put("mensaje", "No se registró proveedor");
+		}
+		return ResponseEntity.ok(salida);
+	}// fin de registar 
+	
+	//Grup de actualizar
+	@PutMapping("/actualizaProveedor")
+	@ResponseBody
+	public ResponseEntity<Map<String, Object>> actualizaProveedor(@RequestBody Proveedor obj) {
+		Map<String, Object> salida = new HashMap<>();
+		try {
+			Proveedor objSalida =  proveedorService.insertaActualizaProveedor(obj);
+			if (objSalida == null) {
+				salida.put("mensaje", "No se actualizo proveedor");
+			} else {
+				salida.put("mensaje", "Se actualizo correctamente.");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			salida.put("mensaje", "No se actualizo proveedor");
+		}
+		return ResponseEntity.ok(salida);
 	}
+	
+	// Grud eliminar
+    @DeleteMapping("/eliminaProveedor/{id}")
+	@ResponseBody
+	public ResponseEntity<Map<String, Object>> eliminaProveedor(@PathVariable("id")int id) {
+		Map<String, Object> salida = new HashMap<>();
+		try {
+			Optional<Proveedor> opt = proveedorService.buscaProveedor(id);
+			if (opt.isPresent()) {
+				proveedorService.eliminaProveedor(id);
+				Optional<Proveedor> optDocente = proveedorService.buscaProveedor(id);
+				if (optDocente.isEmpty()) {
+					salida.put("mensaje", "Se elimino correctamente.");
+				} else {
+					salida.put("mensaje", "No se elimino proveedor");
+				}
+			}else {
+				salida.put("mensaje", "No existe ID proveedor");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			salida.put("mensaje", "No se elimino proveedor");
+		}
+		return ResponseEntity.ok(salida);
+	}
+	
+
 }
