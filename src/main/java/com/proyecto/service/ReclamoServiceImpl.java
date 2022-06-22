@@ -24,4 +24,14 @@ public class ReclamoServiceImpl implements ReclamoService {
 		return Repository.listaReclamoConParametros(fechaRegistro, cliente, TipoReclamo, estado);
 	}
 
+	@Override
+	public Reclamo insertaActualizaReclamo(Reclamo obj) {
+		return Repository.save(obj);
+	}
+
+	@Override
+	public List<Reclamo> listaReclamoPorNombreLike(String nombre) {
+		return Repository.listaReclamoPorNombreLike(nombre);
+	}
+
 }
