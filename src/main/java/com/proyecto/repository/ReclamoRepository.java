@@ -15,4 +15,7 @@ public interface ReclamoRepository extends JpaRepository<Reclamo, Integer>  {
 			+ "( ?3 is 0  or r.tipoReclamo.idTipoReclamo = ?3 ) AND "
 			+ " r.estado = ?4 ")
 		public abstract List<Reclamo> listaReclamoConParametros(String fechaRegistro, int cliente, int TipoReclamo, int estado);
+	@Query("select r from Reclamo r where "
+			+ "( ?1 is '' or r.descripcion like ?1 )" )
+		public abstract List<Reclamo> listaReclamoPorNombreLike(String nombre);
 }
