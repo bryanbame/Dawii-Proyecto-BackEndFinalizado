@@ -37,4 +37,9 @@ public class UsuarioServiceImpl implements UsuarioService{
 		return repository.findByLogin(login);
 	}
 
+	@Override
+	public List<Usuario> listarTodos() {
+		return repository.findAll();
+	}
+
 }
